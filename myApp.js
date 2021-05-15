@@ -14,10 +14,22 @@ app.get("/",function(req, res) {
   res.send('Hello Express');
 });
 */
-
+//json contents
+app.get("/json",function(req, res) {
+  if ( process.env['MESSAGE_STYLE']=== "uppercase"){
+  response = "Hello json".toUpperCase();
+}
+else{
+  response = "Hello json";
+}
+  res.json({"message":response});
+});
+//retrieves index.html file
 app.get("/",function(req, res) {
   res.sendFile(absolutePath);
 });
+
+const mySecret = process.env['MESSAGE']
 
 
 
