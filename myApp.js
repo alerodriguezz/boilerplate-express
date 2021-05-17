@@ -38,14 +38,29 @@ app.get("/",function(req, res) {
   res.sendFile(absolutePath);
 });
 
-const mySecret = process.env['MESSAGE']
+//chain middleware to create a time server
+app.get('/now', 
+(req, res, next) => {
+    // adding a new property to req object
+    // in the middleware function
+    req.string = new Date().toString();
+    next();
+  },
+   (req, res) => {
+    // accessing the newly added property
+    // in the main function
+    res.json({"time":req.string});
+  }
+);
+ //Get Route Parameter Input from the Client
 
-
-
-
-
-
-
+app.get('/:word/echo',
+   (req, res) => {
+    // accessing the newly added property
+    // in the main function
+    res.json({"echo":req.params.word});
+  }
+);
 
 
 
